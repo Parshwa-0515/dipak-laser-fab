@@ -1,121 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Dipak Laser Fab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+    body, html {
       margin: 0;
       padding: 0;
-      color: #333;
-      background-color: #f5f5f5;
-    }
-
-    header {
-      background-color: #2e3b4e;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    header p {
-      font-size: 1.2em;
-      margin-top: 10px;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section h2 {
-      color: #2e3b4e;
-      font-size: 1.8em;
-      margin-bottom: 20px;
-    }
-
-    .services ul,
-    .machines ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .services li,
-    .machines li {
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .contact {
-      background-color: #e3e9f1;
-      padding: 30px;
-      border-radius: 10px;
-    }
-
-    footer {
-      background-color: #2e3b4e;
-      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      position: relative;
       text-align: center;
-      padding: 20px;
     }
 
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2em;
-      }
+    #page1 { background: #1e1e1e; color: white; }
+    #page2 { background: #2c2c2c; color: white; }
+    #page3 { background: #3a3a3a; color: white; }
+    #page4 { background: #4a4a4a; color: white; }
+
+    .steel-sheet {
+      width: 400px;
+      height: auto;
+      position: absolute;
+      top: -300px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Dipak Laser Fab</h1>
-    <p>Precision Fabrication | CNC Cutting | Custom Manufacturing</p>
-  </header>
-
-  <section class="about">
-    <h2>About Us</h2>
-    <p>Dipak Laser Fab specializes in high-precision fabrication of outer body parts for textile machinery, custom CNC grill designs, AC outdoor unit stands, and food display counters for catering services. We are driven by quality and backed by industry-grade machinery.</p>
+  <!-- Page 1: Intro -->
+  <section id="page1">
+    <div>
+      <h1>Welcome to Dipak Laser Fab</h1>
+      <p>Stainless Steel Sheet (4ft x 2ft)</p>
+      <img src="A_3D-rendered_digital_image_features_a_single_rect.png" class="steel-sheet" id="sheet">
+    </div>
   </section>
 
-  <section class="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>Textile Machine Outer Body Manufacturing</li>
-      <li>CNC Grill Design & Fabrication</li>
-      <li>AC Outdoor Unit Stand Fabrication</li>
-      <li>Food Display Counter Manufacturing</li>
-    </ul>
+  <!-- Page 2: Sheet Drops -->
+  <section id="page2">
+    <h2>Sheet Coming Down for CNC Cutting</h2>
   </section>
 
-  <section class="machines">
-    <h2>Unit-1 Machinery</h2>
-    <ul>
-      <li>3 CNC Cutting Machines</li>
-      <li>1 Press Machine</li>
-      <li>1 VNC Machine</li>
-    </ul>
+  <!-- Page 3: Machine Appears -->
+  <section id="page3">
+    <h2>CNC Machine Engaged</h2>
   </section>
 
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p><strong>Email:</strong> info@dipaklaserfab.com (or use a personal Gmail for now)</p>
-    <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
-    <p><strong>Location:</strong> [Add factory location here]</p>
+  <!-- Page 4: Cut Design -->
+  <section id="page4">
+    <h2>Final CNC Design</h2>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Dipak Laser Fab. All rights reserved.</p>
-  </footer>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to("#sheet", {
+      scrollTrigger: {
+        trigger: "#page2",
+        start: "top center",
+        end: "bottom center",
+        scrub: true
+      },
+      top: "50%"
+    });
+  </script>
 
 </body>
 </html>
+
 
