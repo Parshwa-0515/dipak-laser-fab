@@ -32,13 +32,28 @@
     #page3 { background: #3a3a3a; color: white; }
     #page4 { background: #4a4a4a; color: white; }
 
-    .steel-sheet {
+    .steel-sheet, .cut-design {
       width: 400px;
-      height: auto;
       position: absolute;
       top: -300px;
       left: 50%;
       transform: translateX(-50%);
+      transition: opacity 0.5s ease;
+    }
+
+    #cncMachine {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      opacity: 0;
+    }
+
+    #cutDesign {
+      opacity: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
@@ -49,7 +64,7 @@
     <div>
       <h1>Welcome to Dipak Laser Fab</h1>
       <p>Stainless Steel Sheet (4ft x 2ft)</p>
-      <img src="A_3D-rendered_digital_image_features_a_single_rect.png" class="steel-sheet" id="sheet">
+      <img src="sheet.png" class="steel-sheet" id="sheet">
     </div>
   </section>
 
@@ -58,19 +73,22 @@
     <h2>Sheet Coming Down for CNC Cutting</h2>
   </section>
 
-  <!-- Page 3: Machine Appears -->
+  <!-- Page 3: CNC Machine Appears -->
   <section id="page3">
     <h2>CNC Machine Engaged</h2>
+    <img src="cnc-machine.png" id="cncMachine">
   </section>
 
   <!-- Page 4: Cut Design -->
   <section id="page4">
     <h2>Final CNC Design</h2>
+    <img src="cut-design.png" class="cut-design" id="cutDesign">
   </section>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    // Drop the steel sheet
     gsap.to("#sheet", {
       scrollTrigger: {
         trigger: "#page2",
@@ -78,12 +96,38 @@
         end: "bottom center",
         scrub: true
       },
-      top: "50%"
+      top: "45%"
+    });
+
+    // Show CNC machine
+    gsap.to("#cncMachine", {
+      scrollTrigger: {
+        trigger: "#page3",
+        start: "top center",
+        end: "bottom center",
+        scrub: true
+      },
+      opacity: 1
+    });
+
+    // Fade out the steel sheet and fade in cut design
+    ScrollTrigger.create({
+      trigger: "#page4",
+      start: "top center",
+      onEnter: () => {
+        gsap.to("#sheet", { opacity: 0, duration: 0.5 });
+        gsap.to("#cutDesign", { opacity: 1, duration: 1 });
+      },
+      onLeaveBack: () => {
+        gsap.to("#sheet", { opacity: 1, duration: 0.5 });
+        gsap.to("#cutDesign", { opacity: 0, duration: 1 });
+      }
     });
   </script>
 
 </body>
 </html>
+
 
 
 
